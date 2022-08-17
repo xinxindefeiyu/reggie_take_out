@@ -12,7 +12,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
+
 
 @Slf4j
 @RestController
@@ -83,12 +83,12 @@ public class EmployeeController {
         log.info("新增员工， 员工信息：{}", employee.toString());
 
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-
-        Long empId = (Long) request.getSession().getAttribute("employee");
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
+//
+//        Long empId = (Long) request.getSession().getAttribute("employee");
+//        employee.setCreateUser(empId);
+//        employee.setUpdateUser(empId);
 
         employeeService.save(employee);
         return R.success("新增员工成功");
@@ -128,9 +128,9 @@ public class EmployeeController {
     public  R<String> update(HttpServletRequest request, @RequestBody Employee employee) {
         log.info("修改员工状态， 员工信息：{}", employee.toString());
 
-        employee.setUpdateTime(LocalDateTime.now());
-        Long empId = (Long) request.getSession().getAttribute("employee");
-        employee.setUpdateUser(empId);
+//        employee.setUpdateTime(LocalDateTime.now());
+//        Long empId = (Long) request.getSession().getAttribute("employee");
+//        employee.setUpdateUser(empId);
 
         employeeService.updateById(employee);
         return R.success("修改员工成功");
