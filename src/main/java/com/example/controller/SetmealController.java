@@ -49,6 +49,17 @@ public class SetmealController {
         return R.success(setmealDtoPage);
     }
 
+    @GetMapping("/list")
+    public R<List<Setmeal>> list(Long categoryId, int status) {
+        LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Setmeal::getCategoryId, categoryId);
+        List<Setmeal> setmeals = setmealService.list(queryWrapper);
+        List<Setmeal> en_setmeals = setmeals.stream()
+                .filter((setmeal -> setmeal.getStatus().equals(1)))
+                .collect(Collectors.toList());
+        return R.success(en_setmeals);
+    }
+
     @PostMapping
     public R<String> save(@RequestBody SetmealDto setmealDto) {
         setmealService.saveWithDish(setmealDto);

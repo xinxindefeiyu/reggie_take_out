@@ -39,7 +39,7 @@ public class UserController {
         if (!phone.isEmpty()) {
             String code = generateValidateCode(4).toString();
             log.info("code = {}", code);
-            sendMessage(phone, code);
+//            sendMessage(phone, code);
             session.setAttribute(phone, code);
             return R.success("手机验证码短信发送成功");
         }
